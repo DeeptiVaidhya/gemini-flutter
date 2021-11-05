@@ -1,0 +1,163 @@
+name: gemini
+description: Gemini
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.13.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.3
+  share: ^2.0.4
+  fluttertoast: ^8.0.8
+  localstorage: ^4.0.0+1
+  form_field_validator: ^1.1.0
+  page_transition: ^2.0.2
+  flutter_switch: ^0.3.2
+  google_fonts: ^2.1.0
+  step_progress_indicator: ^1.0.1
+  custom_radio_grouped_button: ^2.0.0
+  persistent_bottom_nav_bar: ^4.0.2
+  sleek_circular_slider: ^2.0.1
+  chewie: ^1.2.2
+  file_picker: ^3.0.3
+  flutter_html : ^2.0.0
+  badges: ^2.0.1
+  buttons_tabbar: ^1.3.0 
+  flutter_svg: ^0.22.0 
+  url_launcher: ^6.0.9
+  video_player: ^2.1.10
+  audio_video_progress_bar: ^0.5.0
+  audioplayers: ^0.19.1
+  # assets_audio_player: ^3.0.3+3
+  wakelock: ^0.5.2
+  auto_orientation: ^2.0.2
+  audiofileplayer: ^2.0.1
+  just_audio: ^0.8.0
+  visibility_detector: ^0.2.0
+  bubble_tab_indicator: ^0.1.6
+  timelines: ^0.1.0
+  roundcheckbox: ^2.0.2
+  
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/images/left-arrow/ 
+    - assets/images/group-visit/
+    - assets/images/logo-icon/
+    - assets/images/logo-icon/appbar/    
+    - assets/images/icons/meditation/
+    - assets/images/icons/body-scan/
+    - assets/images/icons/community/
+    - assets/images/icons/journal/
+    - assets/images/icons/fullscreen/
+    - assets/images/jaurnal/
+    - assets/images/icons/
+    - assets/images/icons/bell/
+    - assets/images/icons/envelope/
+    - assets/images/icons/navbar-icon/
+    - assets/images/icons/physical/
+    - assets/images/icons/medication/
+    - assets/images/icons/mood/
+    - assets/images/icons/bloodpressure/
+    - assets/images/icons/pulse/
+    - assets/images/icons/weight/
+    - assets/images/icons/edit/
+    - assets/images/icons/send/
+    - assets/images/icons/photo/
+    - assets/images/icons/sprout/
+    - assets/images/icons/seeds/
+    - assets/images/icons/trowel/
+    - assets/images/icons/watering-can/
+    - assets/images/icons/sun/
+    - assets/images/icons/learning/
+    - assets/images/icons/journal/    
+    - assets/images/icons/classes-icon/
+    - assets/images/icons/classes-icon/journal-icon/
+    - assets/images/icons/classes-icon/learning-icon/
+    - assets/images/icons/classes-icon/meditation_pose/
+    - assets/images/icons/classes-icon/practice-icon/
+    - assets/images/icons/classes-icon/community-icon/
+    - assets/images/icons/classes-icon/journal-icon/
+    - assets/images/icons/filter/
+    - assets/images/icons/like-grey/
+    - assets/images/icons/like-green/
+    - assets/images/icons/like-blue-border/
+    - assets/images/icons/green-right-check/
+    - assets/images/icons/comment/
+    - assets/images/icons/close/
+    - assets/images/profile/
+    - assets/images/icons/edit-post/
+    - assets/images/icons/fav-like/
+    - assets/images/icons/fav-unlike/
+    - assets/images/icons/trash/
+    - assets/images/garden/
+    - assets/images/profile/
+    - assets/images/garden/rose/
+    - assets/images/garden/blue-flower/
+    - assets/images/garden/blur-sunflower/
+    - assets/images/garden/sunflower/
+    - assets/images/garden/flower/
+    - assets/images/garden/plant/
+    - assets/images/garden/red-flower/
+    - assets/images/icons/chevron-thin/
+    - assets/images/icons/clear-icon/
+    - assets/images/icons/blue-icon-comment/
+    - assets/images/icons/edit-white/
+    - assets/images/icons/search/
+    - assets/images/icons/checkin/
+    - assets/images/icons/navbar-icon/icon-mood-active/
+    - assets/images/icons/navbar-icon/icon-mood/
+    - assets/images/icons/navbar-icon/icon-course-active/
+    - assets/images/icons/navbar-icon/icon-course/
+    - assets/images/icons/navbar-icon/icon-library/
+    - assets/images/icons/navbar-icon/icon-library-active/
+    - assets/images/icons/navbar-icon/icon-more/
+    - assets/images/icons/navbar-icon/icon-more-active/      
+
+  
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-ExtraLight.ttf
+          weight: 100
+        - asset: assets/fonts/Poppins-Thin.ttf
+          weight: 200
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300          
+        - asset: assets/fonts/Poppins-Regular.ttf          
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf          
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf          
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-Black.ttf
+          weight: 800
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+          weight: 900  
+
+    - family: Gemini
+      fonts:
+        - asset: assets/fonts/gemini.ttf
+          weight: 800
+          
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora-BoldItalic.ttf
+          weight: 700
+        
