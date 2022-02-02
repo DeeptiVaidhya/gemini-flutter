@@ -51,7 +51,7 @@ class _PracticeCompleteState extends State<PracticeComplete> {
               width: width,
               height: height,
               constraints: BoxConstraints(
-                maxWidth: 500,
+                maxWidth: 375,
               ),
               child: Column(
                   children: [

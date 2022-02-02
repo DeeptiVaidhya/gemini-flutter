@@ -16,6 +16,10 @@ updateClassTask(Map<String, dynamic> data) {
   return makeHttpRequest('course/update-class-task', 'post', data);
 }
 
-updatePracticeContent(Map<String, dynamic> data) {
-  return makeHttpRequest('course/update-practice-content', 'post', data);
+// updatePracticeContent(Map<String, dynamic> data) {
+//   return makeHttpRequest('course/update-practice-content', 'post', data);
+// }
+
+updatePracticeWeek(Map<String, dynamic> data) {
+  return makeHttpRequest('user/update-participant-week', 'post', data);
 }

@@ -117,7 +117,7 @@ class ToDoTabState extends State<ToDoTab> with SingleTickerProviderStateMixin {
           child: SingleChildScrollView(
             child: Container(
               constraints: BoxConstraints(
-                maxWidth: 500,
+                maxWidth: 375,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

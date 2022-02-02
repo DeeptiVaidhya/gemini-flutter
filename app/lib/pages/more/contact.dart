@@ -123,7 +123,7 @@ class __ContactState extends State<Contact> {
           body: Center(
             child: Container(
               constraints: BoxConstraints(
-                        maxWidth: 500,
+                        maxWidth: 375,
                       ),
               child: SingleChildScrollView(
                   child: Column(

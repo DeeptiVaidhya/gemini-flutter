@@ -1,25 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gemini/pages/app-css.dart';
-import 'package:gemini/pages/health-check-in/pressure-health-check-in.dart';
 import 'package:gemini/pages/health-check-in/weight-health-check-in.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:gemini/pages/widget/helper.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:gemini/pages/widget/header.dart';
 
 class PulseHealthCheckIn extends StatefulWidget {
+  final String bpsystolic;
+  final String bpdiastolic;
+  final String mentalvalue;
+  final String physicalvalue;
+  final String isSuplement;
+  const PulseHealthCheckIn({Key? key,required this.bpsystolic, required this.bpdiastolic, required this.mentalvalue, required this.physicalvalue,required this.isSuplement}) : super(key: key);
   @override
   _PulseHealthCheckInState createState() => _PulseHealthCheckInState();
 }
 
 class _PulseHealthCheckInState extends State<PulseHealthCheckIn> {
+  final _bpmkey = new GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> _bpmFormKey = GlobalKey<FormFieldState>();
+  
+  bool _isSubmitButtonEnabled = false;
+  var bpm;
+  bool  isLabelBpm = false;
+
+  bool _isFormFieldValid() {
+    return ((_bpmFormKey.currentState!.isValid));
+  }
+
+  bool _isLabelBpmValid() {
+    if (_bpmFormKey.currentState!.value.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return Scaffold(
+     return Stack(children: <Widget>[
+      Image.asset(
+        "assets/images/bg.png",
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        fit: BoxFit.cover,
+      ),
+      Scaffold(
+        backgroundColor: Colors.transparent,
       body: Container(
-        width: width,
-        height: height,
         child: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -39,15 +68,16 @@ class _PulseHealthCheckInState extends State<PulseHealthCheckIn> {
                     back = true,
                     logo = false,
                     skip = true,
-                    backlink = false,
-                    PressureHealthCheckIn(),
+                    backlink = true,
+                    '/blood-pressure-checkin',
                     skiplink = false,
-                    WeightHealthCheckIn(),
-                    headingtext = 'Health check-in', isMsgActive =false,         isNotificationActive=false,
+                    '',
+                    headingtext = 'Health check-in', isMsgActive =false,
+                    isNotificationActive=false,
                     context),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 80, bottom: 16, left: 54, right: 54),
+                Container(
+                  constraints: BoxConstraints(maxWidth: 375),
+                  margin: const EdgeInsets.only(top: 80, bottom: 16, left: 20, right: 20),
                   child: Text(
                     'What is your pulse reading today?',
                     style: AppCss.blue26semibold,
@@ -55,18 +85,32 @@ class _PulseHealthCheckInState extends State<PulseHealthCheckIn> {
                   ),
                 ),
                 Container(
-                  width: 500,
+                  width: 375,
                   margin: const EdgeInsets.only(top: 100.0),
                   child: Form(
-                    // key: formKey,
+                    key: _bpmkey,
                     child: Row(
                       children: <Widget>[
                         new Flexible(
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: new TextField(
+                            child: new TextFormField(
                                 cursorColor: AppColors.MEDIUM_GREY2,
                                 style: AppCss.grey12light,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _bpmFormKey.currentState!.validate();
+                                    _isSubmitButtonEnabled = _isFormFieldValid();
+                                    isLabelBpm = _isLabelBpmValid();
+                                  });
+                                },
+                                key: _bpmFormKey,
+                                keyboardType: TextInputType.number, 
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.deny(new RegExp(r"\s")),
+                                  FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                                ],     
+                                onSaved: (e) => bpm = e!,
                                 decoration: InputDecoration(
                                   labelText: "Enter bpm",
                                   labelStyle: AppCss.mediumgrey12light,
@@ -91,35 +135,39 @@ class _PulseHealthCheckInState extends State<PulseHealthCheckIn> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 160, bottom: 80),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.fade,
-                          child: WeightHealthCheckIn(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                        shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(22),
-                        ),
-                        primary: AppColors.LIGHT_ORANGE),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 12, bottom: 12, left: 88, right: 87),
-                      child: Text("Next".toUpperCase(),
-                          style: AppCss.blue14bold,
-                          textAlign: TextAlign.center),
-                    ),
-                  ),
-                )
+                Container(
+                  margin: const EdgeInsets.only(top: 179, bottom: 78, left: 20, right: 20),
+                  child: buttion(
+                    btnwidth = 295,
+                    btnheight = 44,
+                    btntext = 'SUBMIT',
+                   _isSubmitButtonEnabled
+                      ? AppCss.blue14bold
+                      : AppCss.white14bold,
+                  _isSubmitButtonEnabled
+                      ? AppColors.LIGHT_ORANGE
+                      : AppColors.LIGHT_GREY,
+                      btntypesubmit = true,
+                      _isSubmitButtonEnabled
+                        ? () {
+                        setState(() {
+                          bpm = _bpmFormKey.currentState!.value.toString();  
+                        });                                                
+                        Navigator.of(context).pushReplacement(
+                          new MaterialPageRoute(                         
+                            settings:  RouteSettings(name:'/weight-health-check-in'),
+                            builder: (context) => new WeightHealthCheckIn(bpdiastolic: widget.bpdiastolic,bpsystolic: widget.bpsystolic, mentalvalue: widget.mentalvalue, physicalvalue: widget.physicalvalue,bpm: bpm,isSuplement:widget.isSuplement
+                            ) 
+                          )
+                        ); 
+                      }
+                      : null,13,13,73,72, context),
+                ),
               ]),
         ),
       ),
-    );
+    )
+     ]
+     );
   }
 }

@@ -219,7 +219,7 @@ class _SortByState extends State<SortBy> {
       iconEnabledColor: AppColors.DEEP_BLUE,
       items: sortByList.map((item) {
         return DropdownMenuItem<String>(
-          value: item['title'].toString(),
+          value: item['id'].toString(),
           child: Text(item['title'].toString(), style: AppCss.blue12semibold));
       }).toList(),
       onChanged: (value) {

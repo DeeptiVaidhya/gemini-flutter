@@ -427,8 +427,7 @@ class _CreateYourAccountState extends State<CreateYourAccount> {
                             initialValue:(storageCreateAccount.getItem('phoneNumber') != null)	
                             ? storageCreateAccount.getItem('phoneNumber'): null,
                             inputFormatters: [ FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            autovalidateMode:AutovalidateMode.onUserInteraction,
                             key: _phoneNumberFormKey,
                             cursorColor: AppColors.MEDIUM_GREY2,
                             autocorrect: true,

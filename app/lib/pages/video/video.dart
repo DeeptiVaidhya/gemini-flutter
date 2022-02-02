@@ -11,7 +11,8 @@ import 'package:flutter/services.dart' show SystemChrome;
 class Video extends StatefulWidget {
   final String practiceResourceId;
   final String url;
-  Video({Key? key, required this.practiceResourceId,  this.url=""}) : super(key: key);
+  final String resourceId;
+  Video({Key? key, required this.practiceResourceId,  this.url="",required this.resourceId}) : super(key: key);
   @override
   _VideoState createState() => _VideoState();
 }
@@ -29,10 +30,13 @@ var totalTime;
 void initState() {
   initcontroller();      
 }
+
 initcontroller() {
   _controller  = VideoPlayerController.network(widget.url)
-  ..addListener(() => setState((){}))..setLooping(false)..initialize().then((value) => _controller.pause());  
-  timer = Timer.periodic(Duration(seconds: 15), (Timer t) => fileTracking());
+  ..addListener(() => setState((){}))..setLooping(false)..initialize().then((value) => _controller.pause());
+  //if (widget.videoPlaytype == "practice") {  
+  timer = Timer.periodic(Duration(seconds: 15), (Timer t) => fileTrackingWeekly());  
+  //}
   super.initState();
 }  
 
@@ -51,17 +55,45 @@ initcontroller() {
 //   return true;
 // }
 
-Future<void> fileTracking() async {
-  try { 
-  currentTime = _controller.value.position.inSeconds.toString();
-  totalTime = _controller.value.duration.inSeconds.toString(); 
+// Future<void> fileTracking() async {
+//   try { 
+//   currentTime = _controller.value.position.inSeconds.toString();
+//   totalTime = _controller.value.duration.inSeconds.toString(); 
 
-  final data = await updatePracticeContent(<String, dynamic>{
-    "practice_resource_id":widget.practiceResourceId,
-    "progress_time":currentTime,
-    "total_time":totalTime,
-  });	
-  if (data['status'] == "success") {	
+//   final data = await updatePracticeContent(<String, dynamic>{
+//     "practice_resource_id":widget.practiceResourceId,
+//     "progress_time":currentTime,
+//     "total_time":totalTime,
+//   });	
+//   if (data['status'] == "success") {	
+//   } else {	      
+//       if (data['is_valid']) {	
+//       setState(() {	
+//         Navigator.of(context, rootNavigator: true).pop();	
+//       });	
+//       toast(data['msg']);	
+//     } else {	
+//       Navigator.of(context, rootNavigator: true).pop();		
+//       errortoast(data['msg']);	
+//     }		
+//   }	
+//   } catch (err) {
+//     Navigator.of(context, rootNavigator: true).pop();	
+//     print('Caught error: $err');
+//   }
+// }
+Future<void> fileTrackingWeekly() async {  
+    try { 
+    currentTime = _controller.value.position.inSeconds.toString();
+    totalTime = _controller.value.duration.inSeconds.toString(); 
+
+    final data = await updatePracticeWeek(<String, dynamic>{
+      "class_practice_id":widget.practiceResourceId,
+      "left_player_time":currentTime,
+      "total_player_time":totalTime,
+      "resource_id" : widget.resourceId
+    });	
+    if (data['status'] == "success") {	
   } else {	      
       if (data['is_valid']) {	
       setState(() {	
@@ -72,12 +104,12 @@ Future<void> fileTracking() async {
       Navigator.of(context, rootNavigator: true).pop();		
       errortoast(data['msg']);	
     }		
-  }	
-  } catch (err) {
-    Navigator.of(context, rootNavigator: true).pop();	
-    print('Caught error: $err');
+  }		
+   } catch (err) {
+      Navigator.of(context, rootNavigator: true).pop();	
+      print('Caught error: $err');
+    }
   }
-}
 
   @override
   void dispose() {

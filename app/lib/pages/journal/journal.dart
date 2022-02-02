@@ -85,7 +85,7 @@ class _JournalState extends State<Journal> {
             child: Center(	
               child: Container(	
                 constraints: BoxConstraints(	
-                  maxWidth: 500,	
+                  maxWidth: 375,	
                 ),	
                 child: Column(	
                   children: <Widget>[	

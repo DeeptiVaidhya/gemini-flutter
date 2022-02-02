@@ -89,7 +89,7 @@ class _BodyPracticeState extends State<BodyPractice> {
           child: Center(
             child: Container(
               constraints: BoxConstraints(
-                maxWidth: 500,
+                maxWidth: 375,
               ),
               child: Column(
                   children: [
@@ -117,11 +117,11 @@ class _BodyPracticeState extends State<BodyPractice> {
                         children: [
                           (type == "AUDIO") ? Container(
                           margin: EdgeInsets.only(left: 20,right: 20,top: 16), 
-                          child: AudioPlay(practiceResourceId: practiceFileList[index]['practice_resource_id']!, url: practiceFileList[index]['url']!,title:practiceFileList[index]['title']!, audioStop: widget.audioStop,audioCallback : (e){})
+                          child: AudioPlay(practiceResourceId: practiceFileList[index]['practice_resource_id']!, url: practiceFileList[index]['url']!,title:practiceFileList[index]['title']!, audioStop: widget.audioStop,audioCallback : (e){},resourceId:"")
                         ) : Container(),
                           (type == "VIDEO") ? Container(
                             margin: EdgeInsets.only(left: 20,right: 20,top: 16), 
-                            child: Video(practiceResourceId: practiceFileList[index]['practice_resource_id']!, url: practiceFileList[index]['url']!)
+                            child: Video(practiceResourceId: practiceFileList[index]['practice_resource_id']!, url: practiceFileList[index]['url']!,resourceId:"")
                           ) : Container(),
                         ],
                       );

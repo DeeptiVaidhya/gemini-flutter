@@ -121,7 +121,7 @@ class _CheckAccessCodeState extends State<CheckAccessCode> {
               child: Center(
                 child: Container(
                   constraints: BoxConstraints(
-                    maxWidth: 500,
+                    maxWidth: 375,
                   ),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

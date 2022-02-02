@@ -5,7 +5,7 @@ import 'package:gemini/pages/app-css.dart';
 import 'package:gemini/pages/more/public-profile.dart';
 import 'package:gemini/pages/widget/helper.dart';
 
-postView({post,replyPostActivity,bool isMainPost = false,onPostChange,onReply,onReplyChange,replyData,context,
+postView({mainPostID,post,replyPostActivity,bool isMainPost = false,onPostChange,onReply,onReplyChange,replyData,context,
 onFollow = ''}) {
   if (post?.isEmpty ?? true) {
     return Container();
@@ -28,6 +28,9 @@ onFollow = ''}) {
   bool replyShow = false;
   bool showInputReply = false;
   dynamic likes = 0;
+
+  print("postId?? $postId");
+  print("mainPostID $mainPostID");
 
   if (replyPostActivity.containsKey(postId)) {
     isLiked = replyPostActivity[postId]['like'];
@@ -74,7 +77,7 @@ onFollow = ''}) {
                       settings: RouteSettings(name: url),
                       builder: (context) => new PublicProfile(
                       buddyUserId: userId,
-                      postId: postId,
+                      postId: mainPostID,
                       type: "reply-post")));
                     },
                     child: Text(
@@ -91,7 +94,32 @@ onFollow = ''}) {
           ],
         ),
         trailing: (level <= 1) ? 
-        (isFollow == false) ? 
+        (isFollow == false) ?
+        Container(
+          width: 66,
+          height: 20,
+          child: Material(
+          shape: RoundedRectangleBorder(side: BorderSide(color: AppColors
+          .DEEP_BLUE,width:1,style: BorderStyle.solid),
+          borderRadius:BorderRadius.circular(50)),
+          color: AppColors.PRIMARY_COLOR,
+            child: MaterialButton(
+              padding: EdgeInsets.fromLTRB(1, 2, 1, 2),
+              autofocus: false,
+              elevation: 0,
+              splashColor: Colors.transparent,
+              hoverElevation: 0,
+              onPressed:() {
+                if (onFollow != '') {
+                  onFollow(!isFollow);
+                }
+              },
+              child: Text("Follow post",style: AppCss.blue8bold),
+            ),
+          ),
+        )
+        
+        : 
         InkWell(
           onTap: () {
             if (onFollow != '') {
@@ -99,58 +127,43 @@ onFollow = ''}) {
             }
           },
           child: Container(
-            width: 66,
-            height: 21,
-            decoration: BoxDecoration(
-              border: Border.all(color:AppColors.DEEP_BLUE),
-              borderRadius: new BorderRadius.circular(50.0), 
+          width: 66,
+          height: 20,
+          child: Material(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: AppColors.DEEP_BLUE,width: 1,style: BorderStyle.solid),borderRadius: BorderRadius.circular(50)
             ),
-            child: Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 4),
-              child: Text("Follow post",style: AppCss.blue8bold,textAlign: TextAlign.center)
-            ),
-          ),
-        ) : 
-        InkWell(
-          onTap: () {
-            if (onFollow != '') {
-              onFollow(!isFollow);
-            }
-          },
-          child: Container(             
-            width: 66,
-            height: 20,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              color:AppColors.DEEP_BLUE,
-            ),
-            child: Container(
-              width: 66,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: AppColors.DEEP_BLUE,
-              ),
-              child: Text.rich(
-                TextSpan(
+            color: AppColors.DEEP_BLUE,
+            child: MaterialButton(
+              padding: EdgeInsets.fromLTRB(1, 2, 1, 2),
+              autofocus: false,
+              elevation: 0,
+              splashColor: Colors.transparent,
+              hoverElevation: 0,
+              onPressed:() {
+                if (onFollow != '') {
+                  onFollow(!isFollow);
+                }
+              },
+              child : Text.rich(
+              TextSpan(
                 children: <InlineSpan>[
-                WidgetSpan(
-                  child: SizedBox(width: 6)
-                ),                  
-                WidgetSpan(
-                  child: Image.asset('assets/images/icons/green-right-check/check@3x.png',width: 7.0,
-                  height: 5),
-                ),
                   WidgetSpan(
-                  child: SizedBox(width: 5)
-                ),
-                TextSpan(
-                  text: "Following",
-                  style: AppCss.white8medium,
-                ),                
-                ])
-              ),
+                    child:  Padding(
+                      padding: const EdgeInsets.only(left:0,right:5.0,bottom: 4),
+                      child: Image.asset('assets/images/icons/green-right-check/check@3x.png',width: 7.0,height: 5),
+                    ),
+                  ),
+                  TextSpan(
+                    text: "Following",
+                    style: AppCss.white8medium,
+                  )
+                ]
+              )
+              ), 
             ),
           ),
+          )
         )
         : Text(""),
         onTap: () {},
@@ -396,7 +409,7 @@ replyInput(showInputReply, onReply, replyData, onReplyChange,onPostChange,isMain
             child: Container(
               width: 295,
               height: isValidReply! ? 76 : 36,
-              margin: EdgeInsets.only(top:0,bottom:19),
+              margin: EdgeInsets.only(top:10,bottom:19),
               child: TextFormField(
                   maxLines: 4,
                   style: AppCss.grey12regular,

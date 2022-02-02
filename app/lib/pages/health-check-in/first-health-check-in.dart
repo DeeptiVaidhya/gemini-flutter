@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gemini/pages/app-css.dart';
-import 'package:gemini/pages/health-check-in/pressure-health-check-in.dart';
+import 'package:gemini/pages/health-check-in/blood-pressure-health-check-in.dart';
 import 'package:gemini/pages/widget/helper.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -24,7 +24,7 @@ class _FirstHealthCheckInState extends State<FirstHealthCheckIn> {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("images/bg.png"),
+                  image: AssetImage("assets/images/bg.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -85,7 +85,7 @@ class _FirstHealthCheckInState extends State<FirstHealthCheckIn> {
                             context,
                             PageTransition(
                               type: PageTransitionType.fade,
-                              child: PressureHealthCheckIn(),
+                              child: BloodPressureHealthCheckIn(mentalvalue: '', physicalvalue: '', isSuplement: '',),
                             ),
                           );
                       },12,12,40,59, context),

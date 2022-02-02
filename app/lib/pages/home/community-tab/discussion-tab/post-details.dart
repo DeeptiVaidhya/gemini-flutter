@@ -7,9 +7,7 @@ import 'package:gemini/pages/home/community-tab/discussion-tab/reply-post.dart';
 import 'package:gemini/pages/widget/footer.dart';
 import 'package:gemini/pages/widget/header.dart';
 import 'package:gemini/pages/widget/helper.dart';
-import 'package:gemini/services/home.dart';
 import 'package:gemini/services/post.dart';
-
 import '../../home.dart';
 
 class PostDetails extends StatefulWidget {
@@ -98,7 +96,6 @@ class __PostDetailsState extends State<PostDetails> {
   likeUnlike(postID) async {
     final data = await likeUnlikePost(<String, dynamic>{"post_id": postID});
     if (data['status'] == "success") {
-
       if (postActivity.containsKey(postID)) {
         var isLike = !postActivity[postID]['is_like'];
         var likes = int.parse(postActivity[postID]['likes']);
@@ -266,8 +263,24 @@ class __PostDetailsState extends State<PostDetails> {
                                  Divider(height: 35.0),                                  
                                 ],
                               ), 
-                              trailing: (postActivity[postId]['is_follow'] !=null) ?  
+                              trailing: (postActivity[postId]['is_follow'] ==false) ? 
                               Container(
+                              width: 66,
+                              height: 20,
+                              child: Material(
+                              shape: RoundedRectangleBorder(side: BorderSide(color: AppColors
+                              .DEEP_BLUE,width:1,style: BorderStyle.solid),
+                              borderRadius:BorderRadius.circular(50)),
+                              color: AppColors.PRIMARY_COLOR,
+                                child: MaterialButton(
+                                  padding:const EdgeInsets.fromLTRB(1,5,1,4),
+                                  onPressed:() {
+                                    followPost(postId);
+                                  },
+                                  textColor:AppColors.DEEP_BLUE,
+                                  child: Text("Follow post",style: AppCss.blue8bold),
+                                ),
+                                ),) :Container(
                               width: 66,
                               height: 20,
                               child: Material(
@@ -297,23 +310,7 @@ class __PostDetailsState extends State<PostDetails> {
                                   )
                                   ), 
                                 ),),
-                              ) : Container(
-                              width: 66,
-                              height: 20,
-                              child: Material(
-                              shape: RoundedRectangleBorder(side: BorderSide(color: AppColors
-                              .DEEP_BLUE,width:1,style: BorderStyle.solid),
-                              borderRadius:BorderRadius.circular(50)),
-                              color: AppColors.PRIMARY_COLOR,
-                                child: MaterialButton(
-                                  padding:const EdgeInsets.fromLTRB(1,5,1,4),
-                                  onPressed:() {
-                                    followPost(postId);
-                                  },
-                                  textColor:AppColors.DEEP_BLUE,
-                                  child: Text("Follow post",style: AppCss.blue8bold),
-                                ),
-                                ),),                                                  
+                              ),                                                  
                               onTap: () {}, 
                             ),
                             (postTitle !="") ?
@@ -411,7 +408,7 @@ class __PostDetailsState extends State<PostDetails> {
                                             },
                                             child: Row(
                                             children: [
-                                              SvgPicture.asset('assets/images/icons/trash/trash.svg',
+                                              Image.asset('assets/images/icons/trash/trash.png',
                                               width: 10.8,height: 12),
                                               SizedBox(width: 5.0),
                                               Text('Delete',style: AppCss.blue12bold),

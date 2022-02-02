@@ -6,7 +6,6 @@ import 'package:gemini/pages/widget/footer.dart';
 import 'package:gemini/pages/widget/header.dart';
 import 'package:gemini/pages/widget/helper.dart';
 import 'package:gemini/services/home.dart';
-import 'package:page_transition/page_transition.dart';
 
 class Messages extends StatefulWidget {
   const Messages({Key? key}) : super(key: key);
@@ -83,7 +82,7 @@ class _MessagesState extends State<Messages> {
           child: Center(
             child: Container(
               constraints: BoxConstraints(
-                maxWidth: 500,
+                maxWidth: 375,
               ),
               child: Column(
                 children: <Widget>[
@@ -175,12 +174,15 @@ class _MessagesState extends State<Messages> {
                                     ],
                                   ), 
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.fade,
-                                        child: MessagesDetails(messageContent: '', messageType: '', imagepath: '',text: '', type: ''),
-                                      ),
+                                    var buddy_user_id = isVarEmpty(msgList[index]['buddy_user_id']);                
+                                    var url="/message-details/$buddy_user_id";                              
+                                    Navigator.of(context).pushReplacement(
+                                      new MaterialPageRoute( 
+                                      settings:  RouteSettings(name:url),
+                                      builder: (context) => new MessagesDetails(
+                                        buddy_user_id : buddy_user_id,
+                                        ) 
+                                      )
                                     );
                                   },
                                 ),

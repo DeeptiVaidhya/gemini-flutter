@@ -132,7 +132,7 @@ class _NotificationPageState extends State<NotificationPage> {
             child: Column(
                 children: [
                   Container(
-                    width: 500,
+                    width: 375,
                     margin : const EdgeInsets.only(top:20.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -163,7 +163,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ),
                   Container(
-                    width: 500,
+                    width: 375,
                     margin: const EdgeInsets.only(left:20.0,right: 20,bottom: 40),
                     child: _notificationItem.isEmpty ? 
                     Container(

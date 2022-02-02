@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gemini/custom-icon/gemini-icon.dart';
 import 'package:gemini/pages/app-css.dart';
+import 'package:gemini/pages/health-checkin-record/health-checkin-record.dart';
 import 'package:gemini/pages/more/more.dart';
 import 'package:gemini/pages/more/public-profile.dart';
 import 'package:gemini/pages/widget/footer.dart';
@@ -28,7 +29,8 @@ class _AccountDetailsState extends State<AccountDetails> {
   void initState() {
     super.initState();
     checkLoginToken(context);
-    WidgetsBinding.instance!.addPostFrameCallback((_) => loader(context, _keyLoading));
+    WidgetsBinding.instance!
+        .addPostFrameCallback((_) => loader(context, _keyLoading));
     Future.delayed(Duration.zero, () {
       getUserDetails();
     });
@@ -51,29 +53,28 @@ class _AccountDetailsState extends State<AccountDetails> {
           profilePicture = data['data']['profile_picture'];
         });
       } else {
-        if (data['is_valid'] == false) {	
-          setState(() {	
-            Navigator.of(context, rootNavigator: true).pop();	
+        if (data['is_valid'] == false) {
+          setState(() {
+            Navigator.of(context, rootNavigator: true).pop();
           });
           Navigator.pushNamed(context, '/signin');
-        } else {	
-          setState(() {	
-            Navigator.of(context, rootNavigator: true).pop();	
+        } else {
+          setState(() {
+            Navigator.of(context, rootNavigator: true).pop();
           });
           Navigator.pushNamed(context, '/edit-profile');
           errortoast(data['msg']);
-        }	
+        }
       }
     } catch (err) {
       Navigator.of(context, rootNavigator: true).pop();
       print('Caught error: $err');
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
+    return Stack(children: <Widget>[
       Image.asset(
         "assets/images/bg.png",
         height: MediaQuery.of(context).size.height,
@@ -81,278 +82,329 @@ class _AccountDetailsState extends State<AccountDetails> {
         fit: BoxFit.cover,
       ),
       Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: header(
-          logedin = true,
-          back = true,
-          logo = false,
-          skip = false,
-          backlink = true,
-          '/more',
-          skiplink = false,
-          '/health-check-in',
-          headingtext = 'My Account Details', 
-          isMsgActive =false,       
-          isNotificationActive=false,
-          context),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Container(
-              color: Colors.transparent,
-              constraints: BoxConstraints(
-                maxWidth: 500,
-              ),
-              child: Column(
-                  children: [
-                    (profilePicture!=null) ? 
-                    Container(
-                      margin: EdgeInsets.only(top:18,left: 20, right: 20,),
-                      child : ClipRRect(
-                        borderRadius: BorderRadius.circular(100.0),
-                        child: (profilePicture!="") ? Image.network(profilePicture.toString(),height: 100.0,width: 100.0,fit: BoxFit.cover) : Container(height: 100.0,width: 100.0,
-                          decoration: BoxDecoration(shape: BoxShape.circle,color: AppColors.TRANSPARENT),
-                          child: Icon(GeminiIcon.profile,size: 60, color: AppColors.PRIMARY_COLOR)),
+          backgroundColor: Colors.transparent,
+          appBar: header(
+              logedin = true,
+              back = true,
+              logo = false,
+              skip = false,
+              backlink = true,
+              '/more',
+              skiplink = false,
+              '/health-check-in',
+              headingtext = 'My Account Details',
+              isMsgActive = false,
+              isNotificationActive = false,
+              context),
+          body: SingleChildScrollView(
+            child: Center(
+              child: Container(
+                color: Colors.transparent,
+                constraints: BoxConstraints(
+                  maxWidth: 375,
+                ),
+                child: Column(children: [
+                  (profilePicture != null)
+                      ? Container(
+                          margin: EdgeInsets.only(
+                            top: 18,
+                            left: 20,
+                            right: 20,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100.0),
+                            child: (profilePicture != "")
+                                ? Image.network(profilePicture.toString(),
+                                    height: 100.0,
+                                    width: 100.0,
+                                    fit: BoxFit.cover)
+                                : Container(
+                                    height: 100.0,
+                                    width: 100.0,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.TRANSPARENT),
+                                    child: Icon(GeminiIcon.profile,
+                                        size: 60,
+                                        color: AppColors.PRIMARY_COLOR)),
+                          ),
+                        )
+                      : Container(
+                          margin: EdgeInsets.only(
+                            top: 18,
+                            left: 20,
+                            right: 20,
+                          ),
+                          height: 100.0,
+                          width: 100.0,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.TRANSPARENT),
+                          child: Container(
+                              alignment: Alignment.center,
+                              child: new Icon(GeminiIcon.profile,
+                                  size: 60, color: AppColors.PRIMARY_COLOR)),
                         ),
-                    ): Container(
-                      margin: EdgeInsets.only(top:18,left: 20, right: 20,),
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: BoxDecoration(shape: BoxShape.circle,color: AppColors.TRANSPARENT),
-                      child: Container(
-                      alignment: Alignment.center,
-                      child: new Icon(GeminiIcon.profile,size: 60, color: AppColors.PRIMARY_COLOR)),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: 10,
+                      bottom: 13.0,
+                      left: 20,
+                      right: 20,
                     ),
-                    Container(
-                      margin : const EdgeInsets.only(top:10,bottom: 13.0,left: 20, right: 20,),
-                      child:Image.asset("assets/images/icons/award-icon.png",width: 23.86,height: 29),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.ideographic,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Text("8",style: AppCss.blue14semibold),
-                            Container(
-                              width: 71,height: 35,
-                              child: Text("Consecutive days logged in", style: TextStyle(height:0.6,fontFamily: 'Poppins',color: AppColors.MEDIUM_GREY1, fontSize: 8.0, fontWeight: w500),textAlign: TextAlign.center),
-                            )
-                          ],
-                        ),
-                        VerticalDivider(
-                          width: 15.0,
-                          color: Colors.transparent,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Text("0",style: AppCss.blue14semibold),
-                            Container(width: 58,child: Text("Meditation minutes", style: TextStyle(height:0.6,fontFamily: 'Poppins',color: AppColors.MEDIUM_GREY1, fontSize: 8.0, fontWeight: w500),textAlign: TextAlign.center))
-                          ],
-                        ),
-                        VerticalDivider(
-                          width: 15.0,
-                          color: Colors.transparent,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Text("0",style: AppCss.blue14semibold),
-                            Container(width: 58,height: 25,child: Text("Milestones", style:TextStyle(height:0.6,fontFamily: 'Poppins',color: AppColors.MEDIUM_GREY1, fontSize: 8.0, fontWeight: w500),textAlign: TextAlign.center)),
-                          ],
-                        ),
+                    child: Image.asset("assets/images/icons/award-icon.png",
+                        width: 23.86, height: 29),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.ideographic,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Text("8", style: AppCss.blue14semibold),
+                          Container(
+                            width: 71,
+                            child: Text("Consecutive days logged in",
+                                style: TextStyle(
+                                    height: 1.3,
+                                    fontFamily: 'Poppins',
+                                    color: AppColors.MEDIUM_GREY1,
+                                    fontSize: 8.0,
+                                    fontWeight: w500),
+                                textAlign: TextAlign.center),
+                          )
+                        ],
+                      ),
+                      VerticalDivider(
+                        width: 15.0,
+                        color: Colors.transparent,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text("0", style: AppCss.blue14semibold),
+                          Container(
+                              width: 58,
+                              child: Text("Meditation minutes",
+                                  style: TextStyle(
+                                      height: 1.3,
+                                      fontFamily: 'Poppins',
+                                      color: AppColors.MEDIUM_GREY1,
+                                      fontSize: 8.0,
+                                      fontWeight: w500),
+                                  textAlign: TextAlign.center))
+                        ],
+                      ),
+                      VerticalDivider(
+                        width: 15.0,
+                        color: Colors.transparent,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text("0", style: AppCss.blue14semibold),
+                          Container(
+                              width: 58,
+                              height: 25,
+                              child: Text("Milestones",
+                                  style: TextStyle(
+                                      height: 1.3,
+                                      fontFamily: 'Poppins',
+                                      color: AppColors.MEDIUM_GREY1,
+                                      fontSize: 8.0,
+                                      fontWeight: w500),
+                                  textAlign: TextAlign.center)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: 20, right: 20, top: 10, bottom: 117),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppColors.SHADOWCOLOR,
+                            spreadRadius: 0,
+                            blurRadius: 7,
+                            offset: Offset(0, 4))
                       ],
                     ),
-                    Container(
-                        margin: EdgeInsets.only(left: 20, right: 20,top: 10,bottom: 117),
-                        decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)
-                        ),                        
-                        boxShadow: [
-                          BoxShadow(color: AppColors.SHADOWCOLOR,spreadRadius: 0,blurRadius: 7,offset: Offset(0, 4))
-                        ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15.0),
-                            topRight: Radius.circular(15.0),
-                          ),
-                          child: ListView(
-                            scrollDirection: Axis.vertical,
-                            physics: PageScrollPhysics(),
-                            shrinkWrap: true,
-                            children: <Widget>[
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Color(0xFFEBEBEB))),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15.0),
-                                    topRight: Radius.circular(15.0),
-                                  ),
-                                  child: Card(
-                                    margin: EdgeInsets.zero,
-                                    shadowColor: Color(0xFF3333331A),
-                                    semanticContainer: true,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.zero),
-                                    elevation: 1.0,
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: ListTile(
-                                      title: Text('My public profile',
-                                          style: AppCss.blue16semibold),
-                                      trailing: Icon(
-                                          Icons.keyboard_arrow_right,
-                                          color: AppColors.DEEP_BLUE,
-                                          size: 30),
-                                      selected: true,
-                                      onTap: () {          
-                                        var url="/public-profile/$userId";                              
-                                        Navigator.of(context).pushReplacement(
-                                          new MaterialPageRoute( 
-                                          settings: RouteSettings(name:url),
-                                          builder: (context) => new PublicProfile(buddyUserId:userId,type: "account", postId: "")
-                                        )
-                                      );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: Color(0xFFEBEBEB))),
-                                ),
-                                child: Card(
-                                  margin: EdgeInsets.zero,
-                                  shadowColor: Color(0xFF3333331A),
-                                  semanticContainer: true,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.zero),
-                                  elevation: 1.0,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  child: ListTile(
-                                    title: Text('My health check-in records',
-                                        style: AppCss.blue16semibold),
-                                    trailing: Icon(Icons.keyboard_arrow_right,
-                                        color: AppColors.DEEP_BLUE, size: 30),
-                                    selected: true,
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.fade,
-                                          child: More(key: null,),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: Color(0xFFEBEBEB))),
-                                ),
-                                child: Card(
-                                  margin: EdgeInsets.zero,
-                                  shadowColor: Color(0xFF3333331A),
-                                  semanticContainer: true,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.zero),
-                                  elevation: 1.0,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  child: ListTile(
-                                    title: Text('My providers',
-                                        style: AppCss.blue16semibold),
-                                    trailing: Icon(Icons.keyboard_arrow_right,
-                                        color: AppColors.DEEP_BLUE, size: 30),
-                                    selected: true,
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.fade,
-                                          child: More(),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: Color(0xFFEBEBEB))),
-                                ),
-                                child: Card(
-                                  margin: EdgeInsets.zero,
-                                  shadowColor: Color(0xFF3333331A),
-                                  semanticContainer: true,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.zero),
-                                  elevation: 1.0,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  child: ListTile(
-                                    title: Text('My group sessions',
-                                        style: AppCss.blue16semibold),
-                                    trailing: Icon(Icons.keyboard_arrow_right,
-                                        color: AppColors.DEEP_BLUE, size: 30),
-                                    selected: true,
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.fade,
-                                          child: More(key: null,),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                              ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(15.0),
-                                  bottomRight: Radius.circular(15.0),
-                                ),
-                                child: Card(
-                                  margin: EdgeInsets.zero,
-                                  shadowColor: Color(0xFF3333331A),
-                                  semanticContainer: true,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.zero),
-                                  elevation: 1.0,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  child: ListTile(
-                                    title: Text('My activity',
-                                        style: AppCss.blue16semibold),
-                                    trailing: Icon(Icons.keyboard_arrow_right,
-                                        color: AppColors.DEEP_BLUE, size: 30),
-                                    selected: true,
-                                    onTap: () {
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15.0),
+                        topRight: Radius.circular(15.0),
                       ),
-                  ]),
+                      child: ListView(
+                        scrollDirection: Axis.vertical,
+                        physics: PageScrollPhysics(),
+                        shrinkWrap: true,
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Color(0xFFEBEBEB))),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15.0),
+                                topRight: Radius.circular(15.0),
+                              ),
+                              child: Card(
+                                margin: EdgeInsets.zero,
+                                shadowColor: Color(0xFF3333331A),
+                                semanticContainer: true,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero),
+                                elevation: 1.0,
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: ListTile(
+                                  title: Text('My public profile',
+                                      style: AppCss.blue16semibold),
+                                  trailing: Icon(Icons.keyboard_arrow_right,
+                                      color: AppColors.DEEP_BLUE, size: 30),
+                                  selected: true,
+                                  onTap: () {
+                                    var url = "/public-profile/$userId";
+                                    Navigator.of(context).pushReplacement(
+                                        new MaterialPageRoute(
+                                            settings: RouteSettings(name: url),
+                                            builder: (context) =>
+                                                new PublicProfile(
+                                                    buddyUserId: userId,
+                                                    type: "account",
+                                                    postId: "")));
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Color(0xFFEBEBEB))),
+                            ),
+                            child: Card(
+                              margin: EdgeInsets.zero,
+                              shadowColor: Color(0xFF3333331A),
+                              semanticContainer: true,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero),
+                              elevation: 1.0,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: ListTile(
+                                title: Text('My health check-in records',
+                                    style: AppCss.blue16semibold),
+                                trailing: Icon(Icons.keyboard_arrow_right,
+                                    color: AppColors.DEEP_BLUE, size: 30),
+                                selected: true,
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/health-check-in-records');
+                                },
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Color(0xFFEBEBEB))),
+                            ),
+                            child: Card(
+                              margin: EdgeInsets.zero,
+                              shadowColor: Color(0xFF3333331A),
+                              semanticContainer: true,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero),
+                              elevation: 1.0,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: ListTile(
+                                title: Text('My providers',
+                                    style: AppCss.blue16semibold),
+                                trailing: Icon(Icons.keyboard_arrow_right,
+                                    color: AppColors.DEEP_BLUE, size: 30),
+                                selected: true,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: More(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(color: Color(0xFFEBEBEB))),
+                            ),
+                            child: Card(
+                              margin: EdgeInsets.zero,
+                              shadowColor: Color(0xFF3333331A),
+                              semanticContainer: true,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero),
+                              elevation: 1.0,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: ListTile(
+                                title: Text('My group sessions',
+                                    style: AppCss.blue16semibold),
+                                trailing: Icon(Icons.keyboard_arrow_right,
+                                    color: AppColors.DEEP_BLUE, size: 30),
+                                selected: true,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: More(
+                                        key: null,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15.0),
+                              bottomRight: Radius.circular(15.0),
+                            ),
+                            child: Card(
+                              margin: EdgeInsets.zero,
+                              shadowColor: Color(0xFF3333331A),
+                              semanticContainer: true,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero),
+                              elevation: 1.0,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: ListTile(
+                                title: Text('My activity',
+                                    style: AppCss.blue16semibold),
+                                trailing: Icon(Icons.keyboard_arrow_right,
+                                    color: AppColors.DEEP_BLUE, size: 30),
+                                selected: true,
+                                onTap: () {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ]),
+              ),
             ),
           ),
-        ),
-     floatingActionButton: floatingactionbuttion(context),
+          floatingActionButton: floatingactionbuttion(context),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: footer(

@@ -18,6 +18,7 @@ class _SignInState extends State<SignIn> {
   
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
   final LocalStorage storage = new LocalStorage('gemini');
+  final LocalStorage loginC = new LocalStorage('gemini_login');
   final _key = new GlobalKey<FormState>();
   final GlobalKey<FormFieldState> _usernameFormKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _passwordFormKey = GlobalKey<FormFieldState>();
@@ -86,12 +87,13 @@ class _SignInState extends State<SignIn> {
         if (rememberme) {
           storage.setItem('username', username);
           storage.setItem('password', password);
-          storage.setItem('rememberme', rememberme);
+          storage.setItem('rememberme', rememberme);          
         } else {
           storage.clear();
         }
         storage.setItem('token', data['token']);
         storage.setItem('name', data['name']);
+        loginC.setItem('login_count', data['login_count']);
         Navigator.of(context, rootNavigator: true).pop();
         Navigator.pushNamed(context, '/home');
       });

@@ -14,10 +14,11 @@ class Library extends StatefulWidget {
 
 class _LibraryState extends State<Library> {
   var menuList = [];
-   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => loader(context, _keyLoader));
+    WidgetsBinding.instance!
+        .addPostFrameCallback((_) => loader(context, _keyLoader));
     checkLoginToken(context);
     getLibraryFilter(context);
     super.initState();
@@ -57,7 +58,8 @@ class _LibraryState extends State<Library> {
       dmenu.add(fltr);
     });
     setState(() {
-      menuList:dmenu;
+      menuList:
+      dmenu;
     });
   }
 
@@ -66,14 +68,14 @@ class _LibraryState extends State<Library> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    Map<String,IconData> _icons = {
-      'favorite':Icons.favorite,
+    Map<String, IconData> _icons = {
+      'favorite': Icons.favorite,
     };
 
     List<Tab> tabs = <Tab>[];
     for (var menu in menuList) {
       tabs.add(Tab(
-      child: Container(
+          child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
@@ -134,7 +136,7 @@ class _LibraryState extends State<Library> {
                   Container(
                     margin: EdgeInsets.only(left: 10),
                     color: Colors.transparent,
-                    constraints: BoxConstraints.expand(height: 33, width: 500),
+                    constraints: BoxConstraints.expand(height: 33, width: 375),
                     child: TabBar(
                       indicatorColor: AppColors.DEEP_BLUE,
                       labelColor: Colors.white,

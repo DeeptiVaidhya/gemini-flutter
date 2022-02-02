@@ -54,7 +54,7 @@ class _JournalDetailsState extends State<JournalDetails> {
           child: Center(
             child: Container(
               constraints: BoxConstraints(
-                maxWidth: 500,
+                maxWidth: 375,
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.only(

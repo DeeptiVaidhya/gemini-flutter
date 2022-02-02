@@ -34,11 +34,13 @@ class AppColors {
   static const Color ffff = Color(0xFFD5F3CF); //#D5F3CF
   static const Color RED = Color(0xFFCC0000); //#CC0000
   static const Color SKY_BLUE = Color(0xFF2D8CFF); //#2D8CFF
-  static const Color Black = Color(0xFF444444); //#D5F3CF
+  static const Color Black = Color(0xFF444444); //#0xFF444444
   static const Color ORANGE = Color(0xFFF29E55); //#F29E55
   static const Color TRANSPARENT = Color(0xFFFEBEBEB); //#EBEBEB
   static const Color LIGHT_GREY1 = Color(0xFFFF5F5F5); //#F5F5F5  
   static const Color BOLD_GREY = Color(0xFF4D4F5C); //#4D4F5C
+  static const F4F9FD = Color(0xFFF4F9FD); //#F4F9FD
+  
 }
 
 class AppCss {

@@ -11,7 +11,7 @@ import 'package:localstorage/localstorage.dart';
 class CreatePost extends StatefulWidget {
   final String topicId;
   final String postTitle;
-  const CreatePost({Key? key, this.topicId="", this.postTitle="",}) : super(key: key);
+  const CreatePost({Key? key, this.topicId="", this.postTitle=""}) : super(key: key);
   @override
   _CreatePostState createState() => _CreatePostState();
 }
@@ -116,7 +116,8 @@ class _CreatePostState extends State<CreatePost> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Stack(children: <Widget>[
+    return Stack(
+      children: <Widget>[
       Image.asset(
         "assets/images/bg.png",
         width: width,
@@ -134,7 +135,9 @@ class _CreatePostState extends State<CreatePost> {
           '/post/$posttopicId',
           skiplink = false,
           '/',
-          headingtext = 'Add your thoughts', isMsgActive =false,isNotificationActive=false,
+          headingtext = 'Add your thoughts',
+          isMsgActive =false,
+          isNotificationActive=false,
           context),
           body: Container(
             height: height,
@@ -143,7 +146,7 @@ class _CreatePostState extends State<CreatePost> {
                 child: Center(
                   child: Container(
                     constraints: BoxConstraints(
-                      maxWidth: 500,
+                      maxWidth: 375,
                     ),
                     child: Column(
                       children: <Widget>[
@@ -177,10 +180,8 @@ class _CreatePostState extends State<CreatePost> {
                               child: TextFormField(
                                 maxLength: 85,
                                 cursorColor: AppColors.MEDIUM_GREY2,
-                                initialValue:
-                                    (storagepost.getItem('title') != null)
-                                        ? storagepost.getItem('title')
-                                        : null,
+                                initialValue:(storagepost.getItem('title') != null)? storagepost.getItem('title')
+                                : null,
                                 key: _titleFormKey,
                                 onChanged: (value) {
                                   setState(() {
@@ -194,17 +195,13 @@ class _CreatePostState extends State<CreatePost> {
                                   filled: true,
                                   fillColor: AppColors.PRIMARY_COLOR,
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: AppColors.MEDIUM_GREY1,
-                                        width: 0.0),
+                                    borderSide: BorderSide(color: AppColors.MEDIUM_GREY1,width: 0.0),
                                   ),
                                   contentPadding: EdgeInsets.all(8),
                                   hintText: "Add a post title (required)",
-                                  labelStyle: AppCss.mediumgrey12light,
+                                  hintStyle: AppCss.mediumgrey12light,
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: AppColors.MEDIUM_GREY1,
-                                        width: 0.0),
+                                    borderSide: BorderSide(color: AppColors.MEDIUM_GREY1,width: 0.0),
                                   ),
                                 ),
                               ),
@@ -300,7 +297,8 @@ class _CreatePostState extends State<CreatePost> {
                                         width: 70,
                                         child: Container(
                                           child: Padding(	
-                                          padding: imageUpload ? EdgeInsets.all(0):EdgeInsets.fromLTRB(20, 24, 20, 23.5),	
+                                          padding: imageUpload ?
+                                          EdgeInsets.all(0):EdgeInsets.fromLTRB(20, 24, 20, 23.5),	
                                           child: InkWell(	
                                             child: imageUpload? Image.memory(fileBytes,width: 70, height: 70,fit: BoxFit.cover)	
                                             : Image.asset('assets/images/icons/photo/camera.png',

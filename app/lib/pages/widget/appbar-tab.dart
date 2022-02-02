@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gemini/custom-icon/gemini-icon.dart';
 import 'package:gemini/pages/app-css.dart';
-import 'package:gemini/pages/messages/messages.dart';
 import 'package:gemini/pages/notifications/notification.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -46,13 +45,7 @@ appbar(isMsgActive, isNotificationActive,context) {
             IconButton(
               hoverColor: Colors.transparent,
               onPressed: () => {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.fade,
-                      child: Messages(),
-                    ),
-                  )
+                Navigator.pushNamed(context, '/messages')
               },
               icon: isMsgActive ? Icon(GeminiIcon.envelope_activate,size: 16,color: AppColors.PRIMARY_COLOR)
               : SvgPicture.asset("assets/images/icons/envelope/envelope.svg",width: 16,height: 16,

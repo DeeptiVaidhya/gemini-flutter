@@ -81,7 +81,7 @@ class _CreateMessagesState extends State<CreateMessages> {
           child: Center(
             child: Container(
               constraints: BoxConstraints(
-                maxWidth: 500,
+                maxWidth: 375,
               ),
               child: Column(
                 children: <Widget>[
@@ -94,53 +94,58 @@ class _CreateMessagesState extends State<CreateMessages> {
             ),
           ),
         ),
-        bottomNavigationBar: Form(
-            key: _key,
-            child: Container(
-              margin: EdgeInsets.only(top:10,bottom:20,left: 20,right: 20),
+        bottomNavigationBar: Container(
+           constraints: BoxConstraints(
+                maxWidth: 375,
+              ),
+          child: Form(
+              key: _key,
               child: Container(
-                height: 44,                
-                child: TextFormField(
-                  key: _msgTextFormKey,
-                   onSaved: (e) => msgText = e!,
-                    style: AppCss.grey12regular,
-                    onChanged: (value) {
-                      //var isValid = value.length > 0;
-                      //replyText = value;
-                      //onReplyChange(replyOnPostId, replyText, isValid); 
-                    },
-                    //onSaved: (e) => value = e!,
-                    decoration: InputDecoration(
-                      contentPadding:EdgeInsets.only(left: 11.57, top: 10, bottom: 9),
-                      hintText: 'Write your message',
-                      hintStyle: AppCss.mediumgrey12light,
-                      filled: true,
-                      fillColor: Colors.white70,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                        borderSide: BorderSide(color: AppColors.LIGHT_GREY),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(color: AppColors.LIGHT_GREY),
-                      ),
-                      suffixIcon: Container(
-                        padding: EdgeInsets.fromLTRB(0, 6.46, 6.0, 5.98),
-                        width: 32,
-                        height: 32,
-                        child: MaterialButton(
-                          shape: CircleBorder(),
-                          color: AppColors.LIGHT_GREY,
-                          padding: EdgeInsets.fromLTRB(7, 9, 9, 8),
-                          onPressed: () {
-                            submitMessage();
-                          },
-                          child: Image.asset('assets/images/icons/send/send.png',width: 15.0,height: 12.5,
-                          color: AppColors.PRIMARY_COLOR),
-                        )))),
+                margin: EdgeInsets.only(top:10,bottom:20,left: 20,right: 20),
+                child: Container(
+                  height: 44,                
+                  child: TextFormField(
+                    key: _msgTextFormKey,
+                     onSaved: (e) => msgText = e!,
+                      style: AppCss.grey12regular,
+                      onChanged: (value) {
+                        //var isValid = value.length > 0;
+                        //replyText = value;
+                        //onReplyChange(replyOnPostId, replyText, isValid); 
+                      },
+                      //onSaved: (e) => value = e!,
+                      decoration: InputDecoration(
+                        contentPadding:EdgeInsets.only(left: 11.57, top: 10, bottom: 9),
+                        hintText: 'Write your message',
+                        hintStyle: AppCss.mediumgrey12light,
+                        filled: true,
+                        fillColor: Colors.white70,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          borderSide: BorderSide(color: AppColors.LIGHT_GREY),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: AppColors.LIGHT_GREY),
+                        ),
+                        suffixIcon: Container(
+                          padding: EdgeInsets.fromLTRB(0, 6.46, 6.0, 5.98),
+                          width: 32,
+                          height: 32,
+                          child: MaterialButton(
+                            shape: CircleBorder(),
+                            color: AppColors.LIGHT_GREY,
+                            padding: EdgeInsets.fromLTRB(7, 9, 9, 8),
+                            onPressed: () {
+                              submitMessage();
+                            },
+                            child: Image.asset('assets/images/icons/send/send.png',width: 15.0,height: 12.5,
+                            color: AppColors.PRIMARY_COLOR),
+                          )))),
+                ),
               ),
             ),
-          ),        
+        ),        
         ),
     ]);
   }

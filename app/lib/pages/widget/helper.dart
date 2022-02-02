@@ -19,9 +19,20 @@ late int paddingbottom;
 late int paddingleft;
 late int paddingright;
 
-//button 
-buttion(btnwidth,btnheight,btntext,btntextstyle,btnbgcolor,simplebtn,onpressfunction,paddingtop,paddingbottom,
-paddingleft,paddingright,context) {
+//button
+buttion(
+    btnwidth,
+    btnheight,
+    btntext,
+    btntextstyle,
+    btnbgcolor,
+    simplebtn,
+    onpressfunction,
+    paddingtop,
+    paddingbottom,
+    paddingleft,
+    paddingright,
+    context) {
   return InkWell(
     hoverColor: btnbgcolor,
     borderRadius: BorderRadius.circular(100),
@@ -34,26 +45,26 @@ paddingleft,paddingright,context) {
         color: btnbgcolor,
       ),
       child: btntypesubmit
-      ? Container(
-          margin: EdgeInsets.only(top: paddingtop, bottom: paddingbottom),
-          alignment: Alignment.center,
-          child: Text(btntext,style: btntextstyle, textAlign: TextAlign.center),
-        )
-      : Row(
-        children: [
-          Container(
-            margin:EdgeInsets.fromLTRB(paddingleft,paddingtop,paddingright,paddingbottom
-            ),
-            child:Text(btntext,style: btntextstyle),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 17, bottom: 16, right: 20),
-            child: CircleAvatar(
-              child: Icon(Icons.done,color: btnbgcolor,size: 20),
-              backgroundColor: AppColors.PRIMARY_COLOR,
-            ),
-          )
-        ]),
+          ? Container(
+              margin: EdgeInsets.only(top: paddingtop, bottom: paddingbottom),
+              alignment: Alignment.center,
+              child: Text(btntext,
+                  style: btntextstyle, textAlign: TextAlign.center),
+            )
+          : Row(children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(
+                    paddingleft, paddingtop, paddingright, paddingbottom),
+                child: Text(btntext, style: btntextstyle),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 17, bottom: 16, right: 20),
+                child: CircleAvatar(
+                  child: Icon(Icons.done, color: btnbgcolor, size: 20),
+                  backgroundColor: AppColors.PRIMARY_COLOR,
+                ),
+              )
+            ]),
     ),
   );
 }
@@ -67,53 +78,54 @@ paddingleft,paddingright,context) {
 
 Future<void> loader(BuildContext context, GlobalKey key) async {
   return showDialog<void>(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) {
-      return new WillPopScope(
-        onWillPop: () async => false,
-        child: SimpleDialog(
-            key: key,
-            backgroundColor: AppColors.PRIMARY_COLOR,              
-            children: <Widget>[
-              Center(
-                child: Column(
-                  children: [
-                  CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(AppColors.DEEP_GREY.withOpacity(0.7)),strokeWidth: 2.0
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Please Wait....",style: AppCss.mediumgrey14light,
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return new WillPopScope(
+            onWillPop: () async => false,
+            child: SimpleDialog(
+                key: key,
+                backgroundColor: AppColors.PRIMARY_COLOR,
+                children: <Widget>[
+                  Center(
+                    child: Column(children: [
+                      CircularProgressIndicator(
+                          valueColor: new AlwaysStoppedAnimation<Color>(
+                              AppColors.DEEP_GREY.withOpacity(0.7)),
+                          strokeWidth: 2.0),
+                      SizedBox(
+
+                        height: 10,
+                      ),
+                      Text(
+                        "Please Wait....",
+                        style: AppCss.mediumgrey14light,
+                      )
+                    ]),
                   )
-                ]),
-              )
-            ]));
+                ]));
       });
 }
+
 // Show toast message
 toast(String message) {
   return Fluttertoast.showToast(
-    msg: message,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.TOP,
-    timeInSecForIosWeb: 3,
-    webBgColor :"linear-gradient(to right, #357B40, #357B40)",
-    textColor: Colors.white
-  );
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 3,
+      webBgColor: "linear-gradient(to right, #357B40, #357B40)",
+      textColor: Colors.white);
 }
 
 errortoast(String message) {
   return Fluttertoast.showToast(
-    msg: message,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.TOP,
-    timeInSecForIosWeb: 3,
-    webBgColor :"linear-gradient(to right, #CC0000, #CC0000)",
-    textColor: Colors.white
-  );
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 3,
+      webBgColor: "linear-gradient(to right, #CC0000, #CC0000)",
+      textColor: Colors.white);
 }
 
 // Show Modal Popup
@@ -192,44 +204,44 @@ checkLoginToken(context) async {
   final LocalStorage storage = new LocalStorage('gemini');
   if (data['status'] == "error") {
     storage.clear();
-    Navigator.pushNamed(context, '/');
+    Navigator.pushNamed(context, '/signin');
     errortoast(data['msg']);
   }
 }
 
-isVarEmpty(val, {title}){  
+isVarEmpty(val, {title}) {
   if (val == null || val == "undefind" || val == "") {
     return "";
   }
   return val;
 }
 
-isEmptyArray(val){  
-  if (val!= 'undefined' || val.length == 0 || val == null) {
+isEmptyArray(val) {
+  if (val != 'undefined' || val.length == 0 || val == null) {
     return "";
   }
-   return val;
+  return val;
 }
 
-isImageCheck(val){
-  if(val == null || val == ""){
+isImageCheck(val) {
+  if (val == null || val == "") {
     return "https://pub1.brightoutcome-dev.com/gemini/admin/assets/images/default-avatar.png";
   }
   return val;
 }
 
-getUrl(){
+getUrl() {
   var uri = Uri.dataFromString(window.location.href);
   var params = uri.pathSegments[5];
-   print(uri.pathSegments[5]);
+  print(uri.pathSegments[5]);
   return params;
 }
 
-dateTimeFormate(datetime) {
+dateTimeFormate(datetime, {dateFormat = ''}) {
   // tz.initializeTimeZones();
   // final DateTime now = DateTime.now();
   // final timeZone = tz.getLocation('America/Chicago');
-// America/Chicago
+  // America/Chicago
   // DateTime d5 = tz.TZDateTime.from(now, timeZone);
   // DateTime d4 = tz.TZDateTime.from(d2, timeZone);
   // DateTime d2 = DateTime.parse(datetime);
@@ -241,6 +253,10 @@ dateTimeFormate(datetime) {
   var minutes = int.parse((d1.difference(d2)).inMinutes.toString());
   var hours = int.parse((d1.difference(d2)).inHours.toString());
   var days = int.parse((d1.difference(d2)).inDays.toString());
+
+  if (dateFormat.isNotEmpty) {
+    return DateFormat(dateFormat).format(d2);
+  }
 
   if (minutes == 0) {
     return "Posted Just Now";

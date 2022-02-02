@@ -46,7 +46,7 @@ class _JournalCompleteState extends State<JournalComplete> {
             child: Center(
               child: Container(
                 constraints: BoxConstraints(
-                  maxWidth: 500,
+                  maxWidth: 375,
                 ),
                 child: Column(
                     children: [

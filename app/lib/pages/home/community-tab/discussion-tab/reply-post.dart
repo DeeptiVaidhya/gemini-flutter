@@ -3,7 +3,6 @@ import 'package:gemini/pages/app-css.dart';
 import 'package:gemini/pages/widget/footer.dart';
 import 'package:gemini/pages/widget/header.dart';
 import 'package:gemini/pages/widget/helper.dart';
-import 'package:gemini/services/home.dart';
 import 'package:gemini/services/post.dart';
 import '../../home.dart';
 import './post-view.dart';
@@ -11,8 +10,7 @@ import './post-view.dart';
 class ReplyPost extends StatefulWidget {
   final String postId;
   final param;
-  const ReplyPost({Key? key, required this.postId, this.param})
-      : super(key: key);
+  const ReplyPost({Key? key, required this.postId, this.param}): super(key: key);
   @override
   _ReplyPostState createState() => _ReplyPostState();
 }
@@ -244,7 +242,7 @@ class _ReplyPostState extends State<ReplyPost> {
           body: SingleChildScrollView(
             child: Center(
               child: Container(
-                constraints: BoxConstraints(maxWidth: 500),
+                constraints: BoxConstraints(maxWidth: 375),
                 child: Column(
                   children: <Widget>[
                     ClipRRect(
@@ -266,6 +264,7 @@ class _ReplyPostState extends State<ReplyPost> {
                         child: Column(
                           children: [
                             postView(
+                                mainPostID : widget.postId,
                                 post: mainPost,
                                 replyPostActivity: replyPostActivity,
                                 isMainPost: true,
@@ -356,6 +355,7 @@ class _ReplyPostState extends State<ReplyPost> {
                           child: Column(
                             children: [
                               postView(
+                                 mainPostID : widget.postId,
                                 post: replyList[index],
                                 replyPostActivity: replyPostActivity,
                                 isMainPost: false,

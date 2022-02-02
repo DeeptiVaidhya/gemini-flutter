@@ -30,16 +30,18 @@ dependencies:
   url_launcher: ^6.0.9
   video_player: ^2.1.10
   audio_video_progress_bar: ^0.5.0
-  audioplayers: ^0.19.1
-  # assets_audio_player: ^3.0.3+3
+  audioplayers: ^0.20.1
+  # assets_audio_player: ^3.0.3+6
   wakelock: ^0.5.2
   auto_orientation: ^2.0.2
-  audiofileplayer: ^2.0.1
-  just_audio: ^0.8.0
+  # audiofileplayer: ^2.0.1
+  just_audio: ^0.9.18
   visibility_detector: ^0.2.0
   bubble_tab_indicator: ^0.1.6
   timelines: ^0.1.0
   roundcheckbox: ^2.0.2
+  open_file: ^3.2.1
+  flutter_bootstrap: ^2.0.0
   
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
@@ -119,6 +121,7 @@ flutter:
     - assets/images/icons/edit-white/
     - assets/images/icons/search/
     - assets/images/icons/checkin/
+    - assets/images/checkin-mood/ 
     - assets/images/icons/navbar-icon/icon-mood-active/
     - assets/images/icons/navbar-icon/icon-mood/
     - assets/images/icons/navbar-icon/icon-course-active/

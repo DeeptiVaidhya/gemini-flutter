@@ -7,7 +7,6 @@ import 'package:gemini/pages/home/community-tab/discussion-tab/reply-post.dart';
 import 'package:gemini/pages/widget/footer.dart';
 import 'package:gemini/pages/widget/header.dart';
 import 'package:gemini/pages/widget/helper.dart';
-import 'package:gemini/services/home.dart';
 import 'package:gemini/services/post.dart';
 import 'create-post.dart';
 
@@ -194,7 +193,7 @@ class _PostState extends State<Post> {
               child: Center(
                 child: Container(
                   constraints: BoxConstraints(
-                    maxWidth: 500,
+                    maxWidth: 375,
                   ), 
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -284,38 +283,66 @@ class _PostState extends State<Post> {
                             ListTile(
                               title: Row(
                                 children: <Widget>[                                  
-                                  Container(
-                                    margin: EdgeInsets.only(top:10),
-                                    height: 30.0,
-                                    width: 30.0,
-                                    child: CircleAvatar(
-                                      radius: 100.0,
-                                      backgroundColor: AppColors.PRIMARY_COLOR,
-                                      backgroundImage:(postsList[index]['profile_picture'] !=null) ?   NetworkImage(isImageCheck(postsList[index]['profile_picture'])) : NetworkImage("https://pub1.brightoutcome-dev.com/gemini/admin/assets/images/default-avatar.png")
+                                  InkWell(
+                                     onTap: (){
+                                        var postId = isVarEmpty(postsList[index]['post_id']);                   
+                                        var url="/reply-post/$postId";                              
+                                        Navigator.of(context).pushReplacement(
+                                          new MaterialPageRoute( 
+                                          settings: RouteSettings(name:url),
+                                          builder: (context) => new ReplyPost(
+                                            postId : postId
+                                            ) 
+                                          )
+                                        ); 
+                                      },
+                                    child: Container(
+                                      margin: EdgeInsets.only(top:10),
+                                      height: 30.0,
+                                      width: 30.0,
+                                      child: CircleAvatar(
+                                        radius: 100.0,
+                                        backgroundColor: AppColors.PRIMARY_COLOR,
+                                        backgroundImage:(postsList[index]['profile_picture'] !=null) ?   NetworkImage(isImageCheck(postsList[index]['profile_picture'])) : NetworkImage("https://pub1.brightoutcome-dev.com/gemini/admin/assets/images/default-avatar.png")
+                                      ),
                                     ),
                                   ),
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    padding:const EdgeInsets.only(top: 12,left: 10),
-                                    child : Column(                                     crossAxisAlignment:CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text.rich(
-                                          TextSpan(
-                                            text: isVarEmpty(postsList[index]['first_name']),
-                                            style : AppCss.green12semibold,
-                                            children: <InlineSpan>[
-                                              WidgetSpan(child: SizedBox(width: 3)),
-                                              TextSpan(
-                                                text: isVarEmpty(postsList[index]['last_name']),
-                                                style: AppCss.green12semibold,
-                                              )
-                                            ]
+                                 InkWell(
+                                     onTap: (){
+                                        var postId = isVarEmpty(postsList[index]['post_id']);                   
+                                        var url="/reply-post/$postId";                              
+                                        Navigator.of(context).pushReplacement(
+                                          new MaterialPageRoute( 
+                                          settings: RouteSettings(name:url),
+                                          builder: (context) => new ReplyPost(
+                                            postId : postId
+                                            ) 
                                           )
-                                        ),
-                                      (postsList[index]['created_at'] !=null)
-                                      ? Text(dateTimeFormate(postsList[index]['created_at']),
-                                      style: AppCss.mediumgrey8medium) : Container(),
-                                      ],
+                                        ); 
+                                      },
+                                    child: Container(
+                                      alignment: Alignment.topLeft,
+                                      padding:const EdgeInsets.only(top: 12,left: 10),
+                                      child : Column(                                     crossAxisAlignment:CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text.rich(
+                                            TextSpan(
+                                              text: isVarEmpty(postsList[index]['first_name']),
+                                              style : AppCss.green12semibold,
+                                              children: <InlineSpan>[
+                                                WidgetSpan(child: SizedBox(width: 3)),
+                                                TextSpan(
+                                                  text: isVarEmpty(postsList[index]['last_name']),
+                                                  style: AppCss.green12semibold,
+                                                )
+                                              ]
+                                            )
+                                          ),
+                                        (postsList[index]['created_at'] !=null)
+                                        ? Text(dateTimeFormate(postsList[index]['created_at']),
+                                        style: AppCss.mediumgrey8medium) : Container(),
+                                        ],
+                                      ),
                                     ),
                                   ),                              
                                 ],

@@ -36,4 +36,27 @@ contactUs(Map<String, dynamic> data) {
   return makeHttpRequest('auth/contact_us', 'post', data);
 }
 
+messageDetails(Map<String, dynamic> data){
+  return makeHttpRequest('message/buddy-message', 'post', data);
+}
+
+getWeeklyCheckin(Map<String, dynamic> data){
+  return makeHttpRequest('user/get-weekly-checkin', 'post', data);
+}
+
+weeklyCheckin(Map<String, dynamic> data){
+  return makeHttpRequest('user/weekly-checkin', 'post', data);
+}
+
+getVirtualVisits(Map<String, dynamic> data){
+  return makeHttpRequest('course/get-virtual-visits', 'get', data);
+}
+
+courseClassDetail(Map<String, dynamic> data){
+  return makeHttpRequest('course/class-detail', 'post', data);
+}
+
+getPracticeLog(Map<String, dynamic> data){
+  return makeHttpRequest('course/get-practice-log', 'get', data);
+}
 

@@ -123,7 +123,7 @@ class _EditJournalEntryState extends State<EditJournalEntry> {
               child: Column(
                 children: <Widget>[
                 Container(	
-                  width: 500,
+                  width: 375,
                   padding: EdgeInsets.only(top: 20, left: 20, bottom: 24, right: 20),	
                   child: Text("Take a moment to reflect on lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed At vero eos et accusam et justo dolores.",	style: AppCss.blue18semibold,textAlign: TextAlign.center,	
                   ),	
@@ -134,7 +134,7 @@ class _EditJournalEntryState extends State<EditJournalEntry> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(
                             top: 10, left: 18, bottom: 10, right: 18),
                         child: TextFormField(
@@ -166,7 +166,7 @@ class _EditJournalEntryState extends State<EditJournalEntry> {
                         ),
                       ),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(left: 18, right: 18),
                         child: Align(
                           alignment: Alignment.topRight,
@@ -178,7 +178,7 @@ class _EditJournalEntryState extends State<EditJournalEntry> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: Container(
-                            width: 500,
+                            width: 375,
                             padding: EdgeInsets.only(
                                 top: 10, left: 18, bottom: 10, right: 18),
                             child: TextFormField(
@@ -218,7 +218,7 @@ class _EditJournalEntryState extends State<EditJournalEntry> {
                         ),
                       ),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(left: 20, right: 20,top: 16),
                         child: Align(
                           alignment: Alignment.topLeft,
@@ -229,7 +229,7 @@ class _EditJournalEntryState extends State<EditJournalEntry> {
                       ),
 
                       Container(
-                      width: 500,	
+                      width: 375,	
                       padding: EdgeInsets.only(left: 18,top: 13),	
                       child: Align(
                         alignment: Alignment.topLeft,	

@@ -210,7 +210,7 @@ class _CreateUserDetailsState extends State<CreateUserDetails> {
       "zip_code": widget.accessCode,
       "phone_number": widget.phoneNumber,
       "time_zone": widget.timeZone,
-      "access_code" : widget.accessCode
+      "access_code" : "12345"
     });
     if (data['status'] == "success") {
       toast(data['msg']);

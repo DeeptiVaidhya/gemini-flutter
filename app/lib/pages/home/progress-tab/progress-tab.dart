@@ -11,8 +11,9 @@ class ProgressTab extends StatefulWidget {
 }
 
 class _ProgressTabState extends State<ProgressTab> with SingleTickerProviderStateMixin {
+
   late TabController _tabController;
- int activeTabIndex = 0;
+  int activeTabIndex = 0;
   @override
   void initState() {
     checkLoginToken(context);
@@ -46,7 +47,7 @@ class _ProgressTabState extends State<ProgressTab> with SingleTickerProviderStat
             height: height,
             width: width,
             constraints: BoxConstraints(
-              maxWidth: 500,
+              maxWidth: 375,
             ),
             child: Column(
               children: [

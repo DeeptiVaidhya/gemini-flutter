@@ -23,7 +23,7 @@ class _GardenState extends State<Garden> {
               height: height,
               width: width,
             constraints: BoxConstraints(
-              maxWidth: 500,
+              maxWidth: 375,
             ), 
             child:Column(
               children: [
@@ -37,7 +37,7 @@ class _GardenState extends State<Garden> {
                 ),
                 Flexible(
                   child: Container(
-                    padding: EdgeInsets.only(left:50,right: 50,top: 13),
+                    padding: EdgeInsets.only(left:40,right: 50,top: 13),
                     child: GridView.count( 
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),

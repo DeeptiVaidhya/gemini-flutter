@@ -37,10 +37,10 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
                 ),
                 Container(
                   // constraints: BoxConstraints(
-                  //   maxWidth: 500,
+                  //   maxWidth: 375,
                   // ),
                   margin: EdgeInsets.only(left: 0,right: 0,top: 16), 
-                  child:  Video(practiceResourceId: widget.practiceResourceId, url: widget.url)
+                  child:  Video(practiceResourceId: widget.practiceResourceId, url: widget.url,resourceId: '')
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 80, bottom: 30, left: 54, right: 46),

@@ -6,7 +6,6 @@ import 'package:gemini/pages/home/community-tab/discussion-tab/post.dart';
 import 'package:gemini/pages/widget/header.dart';
 import 'package:gemini/pages/app-css.dart';
 import 'package:gemini/pages/widget/helper.dart';
-import 'package:gemini/services/home.dart';
 import 'package:gemini/services/post.dart';
 
 class EditPost extends StatefulWidget {
@@ -228,7 +227,7 @@ class _EditPostState extends State<EditPost> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(top: 10, left: 18, bottom: 10, right: 18),
                         child: TextFormField(
                           maxLength: 85,
@@ -260,7 +259,7 @@ class _EditPostState extends State<EditPost> {
                         ),
                       ),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(left: 18, right: 18),
                         child: Align(
                           alignment: Alignment.topRight,
@@ -272,7 +271,7 @@ class _EditPostState extends State<EditPost> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: Container(
-                            width: 500,
+                            width: 375,
                             padding: EdgeInsets.only(top: 10, left: 18, bottom: 10, right: 18),
                             child: TextFormField(
                               initialValue:isVarEmpty(postText),
@@ -309,7 +308,7 @@ class _EditPostState extends State<EditPost> {
                         ),
                       ),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(top: 16, left: 20, right: 18),
                         child: Align(
                           alignment: Alignment.topLeft,
@@ -317,7 +316,7 @@ class _EditPostState extends State<EditPost> {
                         ),
                       ),
                       Container(
-                      width: 500,	
+                      width: 375,	
                       padding: EdgeInsets.only(left: 18,top: 13),	
                       child: Align(
                         alignment: Alignment.topLeft,	

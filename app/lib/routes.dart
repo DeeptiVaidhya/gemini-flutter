@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:gemini/pages/health-check-in/meds-health-check-in.dart';
+import 'package:gemini/pages/health-check-in/mental-health-check-in.dart';
+import 'package:gemini/pages/health-check-in/physical-health-check-in.dart';
+import 'package:gemini/pages/health-check-in/blood-pressure-health-check-in.dart';
+import 'package:gemini/pages/health-check-in/pulse-health-check-in.dart';
 import 'package:gemini/pages/health-check-in/start-health-check-in.dart';
+import 'package:gemini/pages/health-check-in/thanks-health-check-in.dart';
+import 'package:gemini/pages/health-check-in/weight-health-check-in.dart';
+import 'package:gemini/pages/health-checkin-record/health-checkin-record.dart';
 import 'package:gemini/pages/home/community-tab/discussion-tab/reply-post.dart';
 import 'package:gemini/pages/learning-topic/learning-topic-details.dart';
 import 'package:gemini/pages/learning-topic/learning-topic.dart';
 import 'package:gemini/pages/library/library-details.dart';
 import 'package:gemini/pages/messages/create-message.dart';
+import 'package:gemini/pages/messages/messages-details.dart';
 import 'package:gemini/pages/messages/messages.dart';
 import 'package:gemini/pages/more/account-details.dart';
 import 'package:gemini/pages/more/contact.dart';
@@ -14,6 +23,7 @@ import 'package:gemini/pages/more/public-profile.dart';
 import 'package:gemini/pages/practice/body-practice/body-practice.dart';
 import 'package:gemini/pages/practice/mind-practice/mind-practice.dart';
 import 'package:gemini/pages/previsit-questions/previsit-intro.dart';
+import 'package:gemini/pages/previsit-questions/previsit-question.dart';
 import 'package:gemini/pages/signin/signin.dart';
 import 'package:gemini/pages/checkin/checkin.dart';
 import 'package:gemini/pages/classes/class-details.dart';
@@ -173,7 +183,7 @@ class _RoutesState extends State<Routes> {
            case '/library-details':
             return PageTransition(
                 settings: settings,
-                child: LibraryDetails(topicId: uri.pathSegments.last),
+                child: LibraryDetails(topicId: uri.pathSegments.last, classId: '', title: '',),
                 type: PageTransitionType.fade);
           case '/class-details':
             return PageTransition(
@@ -246,11 +256,16 @@ class _RoutesState extends State<Routes> {
               settings: settings,
               child: EditProfile(key: null,),
               type: PageTransitionType.fade);
-          case '/privisitQ':
+          case '/start-previsit':
           return PageTransition(
               settings: settings,
               child: PrevisitIntroduction(key: null,),
               type: PageTransitionType.fade);
+          case '/previsit-ques':
+          return PageTransition(
+              settings: settings,
+              child: PrevisitQuestion1(qid: uri.pathSegments.last),
+              type: PageTransitionType.fade);              
           case '/body-practice':
           return PageTransition(
               settings: settings,
@@ -286,6 +301,11 @@ class _RoutesState extends State<Routes> {
               settings: settings,
               child: Messages(),
               type: PageTransitionType.fade);
+            case '/message-details':
+            return PageTransition(
+              settings: settings,
+              child: MessagesDetails(buddy_user_id: uri.pathSegments.last),
+              type: PageTransitionType.fade);
             case '/contact':
             return PageTransition(
               settings: settings,
@@ -296,6 +316,49 @@ class _RoutesState extends State<Routes> {
               settings: settings,
               child: StartHealthCheckIn(),
               type: PageTransitionType.fade);
+            case '/mental-checkin':
+            return PageTransition(
+              settings: settings,
+              child: MentalHealthCheckIn(),
+              type: PageTransitionType.fade);
+            case '/physical-checkin':
+            return PageTransition(
+              settings: settings,
+              child: PhysicallyHealthCheckIn(mentalvalue: '',),
+              type: PageTransitionType.fade);
+            case '/meds-checkin':
+            return PageTransition(
+              settings: settings,
+              child: MedsHealthCheckIn(mentalvalue: '', physicalvalue: '',),
+              type: PageTransitionType.fade);
+            case '/blood-pressure-checkin':
+            return PageTransition(
+              settings: settings,
+              child: BloodPressureHealthCheckIn(mentalvalue: '', physicalvalue: '', isSuplement: '',),
+              type: PageTransitionType.fade);
+             case '/pulse-checkin':
+            return PageTransition(
+              settings: settings,
+              child: PulseHealthCheckIn(bpdiastolic: '', bpsystolic: '', mentalvalue: '', physicalvalue: '', isSuplement: '',),
+              type: PageTransitionType.fade);
+              case '/weight-health-check-in':
+            return PageTransition(
+              settings: settings,
+              child: WeightHealthCheckIn(bpm: '', bpdiastolic: '', bpsystolic: '', mentalvalue: '', physicalvalue: '', isSuplement: '',),
+              type: PageTransitionType.fade);
+               case '/thanks-health-check-in':
+            return PageTransition(
+              settings: settings,
+              child: ThanksHealthCheckIn(),
+              type: PageTransitionType.fade);
+             case '/health-check-in-records':
+            return PageTransition(
+              settings: settings,
+              child: HealthCheckinRecord(),
+              type: PageTransitionType.fade); 
+
+
+              
           default:
           return null;
         }

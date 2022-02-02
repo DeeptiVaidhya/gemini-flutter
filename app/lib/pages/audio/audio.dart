@@ -12,7 +12,8 @@ class AudioPlay extends StatefulWidget {
   final audioCallback;
   final String url;
   final String title;
-  const AudioPlay({Key? key, required this.audioStop, this.audioCallback, required this.practiceResourceId, this.url ="",  this.title=""}) : super(key: key);
+  final String resourceId;
+  const AudioPlay({Key? key, required this.audioStop, this.audioCallback, required this.practiceResourceId, this.url ="",  this.title="",required this.resourceId}) : super(key: key);
 
   @override
   _AudioPlayState createState() => _AudioPlayState();
@@ -101,8 +102,33 @@ class _AudioPlayState extends State<AudioPlay> {
         var p = player.position;        
         if (audioState == 'played') {
           timerCounter+=1;
+          if((timerCounter)%10==0){             
+            fileTrackingWeekly();
+            //fileTracking();
+          }
+          setState(() {
+            position = p;
+          });
+        } else {
+          timer.cancel();
+        }
+      }
+    });
+  }
+
+  getPositionNew() {
+    timer = Timer.periodic(new Duration(seconds: 1), (timer) {
+      if (mounted) {
+        if (widget.audioStop == true) {
+          stopAudio();
+          timer.cancel();
+          player.dispose();
+          return;
+        }
+        var p = player.position;        
+        if (audioState == 'played') {
+          timerCounter+=1;
           if((timerCounter)%10==0){
-            fileTracking();
           }
           setState(() {
             position = p;
@@ -126,6 +152,11 @@ class _AudioPlayState extends State<AudioPlay> {
 
         if (state.playing && audioState!="played") {
           getPosition();
+          // if (widget.audioPlaytype == "practice") {
+          //   getPosition();
+          // }else{
+          //   getPositionNew();
+          // }
           setState(() {
             audioState = 'played';
           });
@@ -169,15 +200,47 @@ class _AudioPlayState extends State<AudioPlay> {
     await player.setVolume(v);
   }
 
-  Future<void> fileTracking() async {
+  // Future<void> fileTracking() async {
+  //   try { 
+  //   currentTime = position.inSeconds.toString();
+  //   totalTime = duration.inSeconds.toString(); 
+
+  //   final data = await updatePracticeContent(<String, dynamic>{
+  //     "practice_resource_id":widget.practiceResourceId,
+  //     "progress_time":currentTime,
+  //     "total_time":totalTime,
+  //   });	
+  //   if (data['status'] == "success") {	
+  //     widget.audioCallback({"totalTime" : totalTime,"currentTime":currentTime});
+  //   } else {	      
+  //     if (data['is_valid'] == false) {	
+  //       setState(() {	
+  //         Navigator.of(context, rootNavigator: true).pop();	
+  //       });
+  //       Navigator.pushNamed(context, '/signin');
+  //     } else {	
+  //       setState(() {	
+  //         Navigator.of(context, rootNavigator: true).pop();	
+  //       });
+  //       errortoast(data['msg']);	
+  //     }		
+  //   }	
+  //  } catch (err) {
+  //     Navigator.of(context, rootNavigator: true).pop();	
+  //     print('Caught error: $err');
+  //   }
+  // }
+
+   Future<void> fileTrackingWeekly() async {
     try { 
     currentTime = position.inSeconds.toString();
     totalTime = duration.inSeconds.toString(); 
 
-    final data = await updatePracticeContent(<String, dynamic>{
-      "practice_resource_id":widget.practiceResourceId,
-      "progress_time":currentTime,
-      "total_time":totalTime,
+    final data = await updatePracticeWeek(<String, dynamic>{
+      "class_practice_id":widget.practiceResourceId,
+      "left_player_time":currentTime,
+      "total_player_time":totalTime,
+      "resource_id" : widget.resourceId
     });	
     if (data['status'] == "success") {	
       widget.audioCallback({"totalTime" : totalTime,"currentTime":currentTime});
@@ -242,7 +305,7 @@ class _AudioPlayState extends State<AudioPlay> {
             subtitle: Container(
               alignment: Alignment.topCenter,
               padding: const EdgeInsets.only(top: 10,bottom: 10),
-              child: new Text(widget.title.toString(), style: AppCss.blue14semibold),
+              child: new Text(widget.title.toString(), style: AppCss.blue14semibold,overflow: TextOverflow.ellipsis),
             ),
             trailing: Wrap(
               children: [

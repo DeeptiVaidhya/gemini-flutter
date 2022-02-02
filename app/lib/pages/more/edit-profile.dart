@@ -404,8 +404,8 @@ class _EditProfileState extends State<EditProfile> {
                           width: 28,height: 28,
                           decoration: BoxDecoration(shape: BoxShape.circle,color: AppColors.LIGHT_ORANGE,
                           border:Border.all(color: Colors.white, width: 2)),     
-                          child : new Padding(
-                            padding: EdgeInsets.only(bottom:7.0),
+                          child : new Container(
+                            alignment: Alignment.center,
                             child: Icon(GeminiIcon.icon_edit_white,size: 10, color: AppColors.PRIMARY_COLOR)),
                         ),
                       ),
@@ -418,7 +418,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                          width: 500,
+                          width: 375,
                           child: Padding(
                             padding: EdgeInsets.only(
                                 top: 10, left: 18, bottom: 5, right: 18),
@@ -427,7 +427,7 @@ class _EditProfileState extends State<EditProfile> {
                                 textAlign: TextAlign.left),
                           )),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(
                             top: 0, left: 18, bottom: 13, right: 18),
                         child: TextFormField(
@@ -476,7 +476,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       Container(
-                          width: 500,
+                          width: 375,
                           child: Padding(
                             padding: EdgeInsets.only(
                                 top: 0, left: 18, bottom: 5, right: 18),
@@ -485,7 +485,7 @@ class _EditProfileState extends State<EditProfile> {
                                 textAlign: TextAlign.left),
                           )),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(
                             top: 0, left: 18, bottom: 13, right: 18),
                         child: TextFormField(
@@ -536,7 +536,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       Container(
-                          width: 500,
+                          width: 375,
                           child: Padding(
                             padding: EdgeInsets.only(
                                 top: 0, left: 18, bottom: 5, right: 18),
@@ -545,7 +545,7 @@ class _EditProfileState extends State<EditProfile> {
                                 textAlign: TextAlign.left),
                           )),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: EdgeInsets.only(
                             top: 0, left: 18, bottom: 13, right: 18),
                         child: TextFormField(
@@ -591,7 +591,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       Container(
-                          width: 500,
+                          width: 375,
                           child: Padding(
                             padding: EdgeInsets.only(
                                 top: 0, left: 18, bottom: 5, right: 18),
@@ -601,7 +601,7 @@ class _EditProfileState extends State<EditProfile> {
                                 textAlign: TextAlign.left),
                           )),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: const EdgeInsets.only(
                             top: 0, left: 18, bottom: 13, right: 18),
                         child: TextFormField(
@@ -667,7 +667,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       Container(
-                          width: 500,
+                          width: 375,
                           child: Padding(
                             padding: EdgeInsets.only(
                                 top: 0, left: 18, bottom: 5, right: 18),
@@ -679,7 +679,7 @@ class _EditProfileState extends State<EditProfile> {
                                 textAlign: TextAlign.left),
                           )),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: const EdgeInsets.only(
                             top: 0, left: 18, bottom: 13, right: 18),
                         child: TextFormField(
@@ -739,7 +739,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       Container(
-                          width: 500,
+                          width: 375,
                           child: Padding(
                             padding: EdgeInsets.only(
                                 top: 0, left: 18, bottom: 5, right: 18),
@@ -751,7 +751,7 @@ class _EditProfileState extends State<EditProfile> {
                                 textAlign: TextAlign.left),
                           )),
                       Container(
-                        width: 500,
+                        width: 375,
                         padding: const EdgeInsets.only(
                             top: 0, left: 18, bottom: 13, right: 18),
                         child: TextFormField(

@@ -58,7 +58,7 @@ class _BuddiesTabState extends State<BuddiesTab> {
           child: Center(
             child: Container(
               constraints: BoxConstraints(
-                maxWidth: 500,
+                maxWidth: 375,
               ),
               child: Column(
                 children: [            
